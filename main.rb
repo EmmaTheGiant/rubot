@@ -6,7 +6,7 @@ bot.command(:kill) do |event|
         event.respond "shutting down"
         bot.stop()
     else
-        event.respond "Im sorry, #{event.message.user.name}, but you can not do that"
+        event.respond "I'm sorry, #{event.message.user.name}, but you can not do that."
     end
 end
 bot.command(:test) do |event|
@@ -37,12 +37,12 @@ bot.command(:msg) do |event|
 end
 bot.command(:reg) do |event|
     if File.file?("./private/data/#{event.message.user.id}")
-        event.respond "you already have an account"
+        event.respond "You already have an account."
     else
         temp=File.new("./private/data/#{event.message.user.id}",'w+')
         temp.write(100)
         temp.close()
-        event.respond "registered!"
+        event.respond "Registered!"
     end
 end
 bot.command(:bet) do |event|
@@ -52,42 +52,42 @@ bot.command(:bet) do |event|
             @bal=f1.gets.to_i
         end
         if @bal<arr[1].to_i
-            event.respond "you dont have $#{arr[1]}"
+            event.respond "You don't have $#{arr[1]}."
         else
             roll=rand(1..50)
             event.respond roll
             case roll
             when 1..15,31..40
-                event.respond "better luck next time"
+                event.respond "Better luck next time."
                 temp=File.new("./private/data/#{event.message.user.id}",'w+')
                 temp.write(@bal-arr[1].to_i)
                 temp.close()
             when 16..20
-                event.respond "you get your money back"
+                event.respond "You get your money back."
             when 41..44
-                event.respond "winner, you get 2x back"
+                event.respond "Winner, you get 2x back."
                 temp=File.new("./private/data/#{event.message.user.id}",'w+')
                 temp.write(@bal+arr[1].to_i)
                 temp.close()
             when 45..47
-                event.respond "winner, you get 3x back"
+                event.respond "Winner, you get 3x back."
                 temp=File.new("./private/data/#{event.message.user.id}",'w+')
                 temp.write(@bal+(arr[1].to_i*2))
                 temp.close()
             when 48..49
-                event.respond "winner, you get 4x back"
+                event.respond "Winner, you get 4x back."
                 temp=File.new("./private/data/#{event.message.user.id}",'w+')
                 temp.write(@bal+(arr[1].to_i*3))
                 temp.close()
             when 50
-                event.respond "JACKPOT, you get 5x back"
+                event.respond "JACKPOT, you get 5x back."
                 temp=File.new("./private/data/#{event.message.user.id}",'w+')
                 temp.write(@bal+(arr[1].to_i*4))
                 temp.close()
             end
         end
     else
-        event.respond "you have no account, please use +reg to register"
+        event.respond "You have no account, please use `+reg` to register."
     end
 end
 bot.command(:bal) do |event|
@@ -96,7 +96,7 @@ bot.command(:bal) do |event|
             event.respond f1.gets
         end
     else
-        event.respond "you have no account, please use +reg to register"
+        event.respond "You have no account, please use `+reg` to register."
     end
 end
 bot.run
