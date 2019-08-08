@@ -99,4 +99,18 @@ bot.command(:bal) do |event|
         event.respond "you have no account, please use +reg to register"
     end
 end
+bot.command(:add) do |event|
+    arr=event.message.content.split(' ')
+    if File.file?("./private/data/#{event.message.user.id}")&&Hide::Admin.include?(event.message.user.id)
+        File.open("./private/data/#{event.message.user.id}",'r') do |f1|
+            @bal=f1.gets.to_i
+        end
+        @bal+=arr[1].to_i
+        temp=File.new("./private/data/#{event.message.user.id}",'w+')
+        temp.write(@bal)
+        temp.close()
+    else
+        event.respond "you have no account, please use +reg to register"
+    end
+end
 bot.run
